@@ -1,5 +1,5 @@
 import { type NextRequest } from 'next/server';
-import { updateSession } from '@/lib/supabase/middleware';
+import { updateSession } from '@/lib/supabase/proxy';
 
 // Middleware to refresh auth session and validate tokens
 export async function middleware(request: NextRequest) {

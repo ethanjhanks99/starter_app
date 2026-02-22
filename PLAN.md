@@ -31,21 +31,21 @@ Establish the core Next.js application, Supabase integration, and styling infras
   - [x] Set up basic project structure (components, lib, app directories, etc.)
   - [x] **Deliverable:** Next.js application ready for Supabase integration
 
-- [ ] **Task 2: Install & configure Supabase CLI locally**
-  - [ ] Install Supabase CLI
-  - [ ] Initialize Supabase project locally (supabase init)
-  - [ ] Configure Docker for Supabase local development
-  - [ ] Start local Supabase instance
-  - [ ] Verify connection and credentials
-  - [ ] **Deliverable:** Supabase running locally with credentials available
+- [x] **Task 2: Install & configure Supabase CLI locally**
+  - [x] Install Supabase CLI
+  - [x] Initialize Supabase project locally (supabase init)
+  - [x] Configure Docker for Supabase local development
+  - [x] Start local Supabase instance
+  - [x] Verify connection and credentials
+  - [x] **Deliverable:** Supabase running locally with credentials available
 
-- [ ] **Task 3: Create Supabase client utilities (SSR)**
-  - [ ] Install @supabase/ssr and @supabase/supabase-js
-  - [ ] Create server-side client utility
-  - [ ] Create client-side client utility
-  - [ ] Handle token refresh patterns
-  - [ ] **Location:** lib/supabase/ folder
-  - [ ] **Deliverable:** Reusable Supabase client initialization
+- [x] **Task 3: Create Supabase client utilities (SSR)**
+  - [x] Install @supabase/ssr and @supabase/supabase-js
+  - [x] Create server-side client utility
+  - [x] Create client-side client utility
+  - [x] Handle token refresh patterns
+  - [x] **Location:** lib/supabase/ folder
+  - [x] **Deliverable:** Reusable Supabase client initialization
 
 - [ ] **Task 4: Configure Next.js middleware for token refresh**
   - [ ] Create middleware.ts in project root

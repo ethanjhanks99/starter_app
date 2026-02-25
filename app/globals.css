@@ -3,11 +3,24 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-danger: var(--danger);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -16,11 +29,95 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --border: #374151;
+    --card-bg: #111827;
+    --input-bg: #1f2937;
+    --muted: #9ca3af;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* ── Layout helpers ───────────────────────────────────────────── */
+@layer components {
+  .page-container {
+    @apply max-w-4xl mx-auto px-4 py-8;
+  }
+
+  .auth-container {
+    @apply min-h-screen flex items-center justify-center bg-[var(--background)] px-4;
+  }
+
+  /* ── Card ──────────────────────────────────────────────────── */
+  .card {
+    @apply bg-[var(--card-bg)] border border-[var(--border)] rounded-xl shadow-sm p-6;
+  }
+
+  /* ── Form elements ─────────────────────────────────────────── */
+  .form-group {
+    @apply flex flex-col gap-1;
+  }
+
+  .form-label {
+    @apply text-sm font-medium text-[var(--foreground)];
+  }
+
+  .form-input {
+    @apply w-full rounded-lg border border-[var(--border)] bg-[var(--input-bg)]
+           px-3 py-2 text-sm text-[var(--foreground)]
+           placeholder:text-[var(--muted)]
+           focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .form-input-error {
+    @apply border-[var(--danger)] focus:ring-[var(--danger)];
+  }
+
+  .form-error {
+    @apply text-xs text-[var(--danger)] mt-0.5;
+  }
+
+  /* ── Buttons ───────────────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg font-medium
+           transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-sm  { @apply px-3 py-1.5 text-xs; }
+  .btn-md  { @apply px-4 py-2   text-sm; }
+  .btn-lg  { @apply px-6 py-3   text-base; }
+
+  .btn-primary {
+    @apply btn bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)]
+           focus:ring-[var(--primary)];
+  }
+
+  .btn-secondary {
+    @apply btn bg-transparent text-[var(--foreground)]
+           border border-[var(--border)] hover:bg-[var(--border)]
+           focus:ring-[var(--primary)];
+  }
+
+  .btn-danger {
+    @apply btn bg-[var(--danger)] text-white hover:bg-[var(--danger-hover)]
+           focus:ring-[var(--danger)];
+  }
+
+  /* ── Typography helpers ────────────────────────────────────── */
+  .page-title   { @apply text-3xl font-bold tracking-tight; }
+  .section-title { @apply text-xl font-semibold; }
+  .muted-text   { @apply text-sm text-[var(--muted)]; }
+
+  /* ── Link ──────────────────────────────────────────────────── */
+  .link {
+    @apply text-[var(--primary)] underline-offset-4 hover:underline;
+  }
 }

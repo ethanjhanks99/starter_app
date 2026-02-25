@@ -47,29 +47,29 @@ Establish the core Next.js application, Supabase integration, and styling infras
   - [x] **Location:** lib/supabase/ folder
   - [x] **Deliverable:** Reusable Supabase client initialization
 
-- [ ] **Task 4: Configure Next.js middleware for token refresh**
-  - [ ] Create middleware.ts in project root
-  - [ ] Implement token refresh proxy
-  - [ ] Handle session validation on each request
-  - [ ] **Deliverable:** middleware.ts configured for automatic token refresh
+- [x] **Task 4: Configure Next.js middleware for token refresh**
+  - [x] Create middleware.ts in project root
+  - [x] Implement token refresh proxy
+  - [x] Handle session validation on each request
+  - [x] **Deliverable:** middleware.ts configured for automatic token refresh
 
-- [ ] **Task 5: Set up basic styling (Tailwind or CSS)**
-  - [ ] Install and configure Tailwind CSS (recommended) or alternative styling solution
-  - [ ] Set up globals.css
-  - [ ] Ensure styling is available across application
-  - [ ] **Deliverable:** Working styling solution integrated with project
+- [x] **Task 5: Set up basic styling (Tailwind or CSS)**
+  - [x] Install and configure Tailwind CSS (recommended) or alternative styling solution
+  - [x] Set up globals.css
+  - [x] Ensure styling is available across application
+  - [x] **Deliverable:** Working styling solution integrated with project
 
 ---
 
 ### Phase 2: Database & Security (Tasks 6-9)
 Design and implement the database schema with security measures.
 
-- [ ] **Task 6: Create declarative profiles schema**
-  - [ ] Create supabase/schemas/profiles.sql
-  - [ ] Define profiles table with id, email, full_name, avatar_url, updated_at
-  - [ ] Set id as primary key referencing auth.users(id)
-  - [ ] Configure updated_at to auto-update via trigger
-  - [ ] **Deliverable:** Declarative schema file ready for migration generation
+- [x] **Task 6: Create declarative profiles schema**
+  - [x] Create supabase/schemas/profiles.sql
+  - [x] Define profiles table with id, email, full_name, avatar_url, updated_at
+  - [x] Set id as primary key referencing auth.users(id)
+  - [x] Configure updated_at to auto-update via trigger
+  - [x] **Deliverable:** Declarative schema file ready for migration generation
 
 - [ ] **Task 7: Generate and implement profiles migration**
   - [ ] Use `npx supabase db diff` to generate migration from schema

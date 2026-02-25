@@ -46,7 +46,7 @@ Successfully created the complete directory structure and initial placeholder fi
 ### Supabase Utilities (`lib/supabase/`)
 1. **client.ts** - Browser/client-side Supabase client using @supabase/ssr
 2. **server.ts** - Server-side Supabase client with cookie handling
-3. **middleware.ts** - Middleware client for token refresh in Next.js middleware
+3. **proxy.ts** - Middleware proxy client for token refresh in Next.js middleware
 
 ### Auth Utilities (`lib/auth/`)
 1. **hooks.ts** - `useAuth()` hook for client components (get current user)
@@ -118,14 +118,14 @@ lib/
 ├── supabase/
 │   ├── client.ts (standalone - creates browser client)
 │   ├── server.ts (standalone - creates server client)
-│   └── middleware.ts (standalone - creates middleware client)
+│   └── proxy.ts (standalone - creates middleware proxy client)
 ├── auth/
 │   ├── hooks.ts (uses client.ts - useAuth hook)
 │   ├── utils.ts (uses server.ts - auth functions)
 │   └── protected.tsx (uses hooks.ts - ProtectedRoute wrapper)
 └── utils.ts (standalone utilities)
 
-middleware.ts (uses lib/supabase/middleware.ts)
+middleware.ts (uses lib/supabase/proxy.ts)
 ```
 
 ## What's Next
@@ -158,3 +158,90 @@ The following were verified:
 - Page routes follow Next.js conventions
 - Middleware.ts is at project root and configured correctly
 - No missing dependencies in existing package.json
+
+# Implementation Notes - Task 5: Styling Setup
+
+## Date Completed
+February 23, 2026
+
+## Overview
+Tailwind CSS v4 was already installed and wired via PostCSS. Enhanced `globals.css` with CSS custom properties and a component layer of reusable utility classes.
+
+## Changes Made
+
+### `app/globals.css`
+- Added CSS custom properties for `--primary`, `--danger`, `--muted`, `--border`, `--card-bg`, `--input-bg` with dark-mode overrides
+- Extended `@theme inline` block to expose new color tokens to Tailwind
+- Added `@layer components` with the following utility classes:
+  - **Layout:** `.page-container`, `.auth-container`
+  - **Card:** `.card`
+  - **Forms:** `.form-group`, `.form-label`, `.form-input`, `.form-input-error`, `.form-error`
+  - **Buttons:** `.btn`, `.btn-sm`, `.btn-md`, `.btn-lg`, `.btn-primary`, `.btn-secondary`, `.btn-danger`
+  - **Typography:** `.page-title`, `.section-title`, `.muted-text`
+  - **Links:** `.link`
+
+### `app/layout.tsx`
+- Updated metadata `title` to `"Starter App"`
+- Updated metadata `description` to `"Next.js + Supabase starter application"`
+
+## Notes
+- Tailwind v4 requires no `tailwind.config.ts`; configuration lives in `globals.css` via `@import "tailwindcss"` and `@theme inline`.
+- Component layer classes reduce repetition in TSX files and act as a design token system.
+
+# Implementation Notes - Task 6: Declarative Profiles Schema
+
+## Date Completed
+February 23, 2026
+
+## Overview
+Created a declarative SQL schema file for the profiles table with automatic `updated_at` trigger and RLS enabled.
+
+## Files Created
+
+### `supabase/schemas/profiles.sql`
+Defines the `profiles` table with:
+- `id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE` — Links profile to Supabase auth user
+- `email TEXT NOT NULL` — User email from auth
+- `full_name TEXT` — User full name
+- `avatar_url TEXT` — URL to user's avatar in storage
+- `updated_at TIMESTAMPTZ` — Auto-updated on every row modification
+
+### Schema Features
+- **RLS Enabled:** `ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;`
+- **Auto-Update Trigger:** `handle_updated_at()` function ensures `updated_at` is refreshed on every `UPDATE`
+- **Declarative:** Schema file defines the entire table structure, ready for migration generation
+
+## Notes
+- `ON DELETE CASCADE` ensures profiles are automatically deleted when a user is deleted from `auth.users`
+- The trigger function `handle_updated_at()` will be shared if more tables need the same behavior in future tasks
+
+# Implementation Notes - Task 7: Generate and Implement Profiles Migration
+
+## Date Completed
+February 23, 2026
+
+## Overview
+Generated migration from declarative schema and applied it to the local Supabase database. The `profiles` table, trigger function, and RLS are now active.
+
+## Migration Generated
+- **File:** `supabase/migrations/20260223185454_profiles_schema.sql`
+- **Command:** `supabase db diff -f profiles_table`
+
+## Migration Contents
+- Created `public.profiles` table with all required columns
+- Set primary key on `id` column
+- Added foreign key constraint `profiles_id_fkey` linking `id` to `auth.users(id) ON DELETE CASCADE`
+- Enabled RLS on `public.profiles`
+- Created `handle_updated_at()` trigger function
+- Created `profiles_updated_at` trigger (BEFORE UPDATE)
+- Granted permissions to `anon`, `authenticated`, and `service_role` roles
+
+## Database State
+- Migration applied successfully via `supabase db diff` (which also ran reset internally)
+- `profiles` table exists in local database with correct structure
+- Trigger is active and will auto-update `updated_at` on row modifications
+- RLS is enabled and ready for policy configuration in Task 9
+
+## Notes
+- The declarative schema approach ensures migrations can be regenerated if schema changes
+- "No schema changes found" output confirms the declarative schema matches the applied migration

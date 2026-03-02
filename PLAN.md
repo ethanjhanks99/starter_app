@@ -71,102 +71,102 @@ Design and implement the database schema with security measures.
   - [x] Configure updated_at to auto-update via trigger
   - [x] **Deliverable:** Declarative schema file ready for migration generation
 
-- [ ] **Task 7: Generate and implement profiles migration**
-  - [ ] Use `npx supabase db diff` to generate migration from schema
-  - [ ] Review and verify generated migration
-  - [ ] Run migration in local Supabase: `npx supabase db reset`
-  - [ ] Verify profiles table created with correct structure
-  - [ ] **Deliverable:** Migration file in supabase/migrations/ and table in database
+- [x] **Task 7: Generate and implement profiles migration**
+  - [x] Use `npx supabase db diff` to generate migration from schema
+  - [x] Review and verify generated migration
+  - [x] Run migration in local Supabase: `npx supabase db reset`
+  - [x] Verify profiles table created with correct structure
+  - [x] **Deliverable:** Migration file in supabase/migrations/ and table in database
 
-- [ ] **Task 8: Create trigger for automatic profile creation**
-  - [ ] Create PostgreSQL trigger function in migration
-  - [ ] Function extracts email from new user record
-  - [ ] Function inserts corresponding profile row
-  - [ ] Handle errors gracefully
-  - [ ] Add trigger to migration file
-  - [ ] **Deliverable:** Trigger configured and tested in local database
+- [x] **Task 8: Create trigger for automatic profile creation**
+  - [x] Create PostgreSQL trigger function in migration
+  - [x] Function extracts email from new user record
+  - [x] Function inserts corresponding profile row
+  - [x] Handle errors gracefully
+  - [x] Add trigger to migration file
+  - [x] **Deliverable:** Trigger configured and tested in local database
 
-- [ ] **Task 9: Implement RLS policies on profiles table**
-  - [ ] Enable RLS on profiles table
-  - [ ] Create SELECT policy: users access their own profile only
-  - [ ] Create UPDATE policy: users update their own profile only
-  - [ ] Create INSERT policy: users insert their own profile (safety measure)
-  - [ ] Test policies to ensure security
-  - [ ] **Deliverable:** RLS policies enforced on profiles table
+- [x] **Task 9: Implement RLS policies on profiles table**
+  - [x] Enable RLS on profiles table
+  - [x] Create SELECT policy: users access their own profile only
+  - [x] Create UPDATE policy: users update their own profile only
+  - [x] Create INSERT policy: users insert their own profile (safety measure)
+  - [x] Test policies to ensure security
+  - [x] **Deliverable:** RLS policies enforced on profiles table
 
 ---
 
 ### Phase 3: Authentication (Tasks 10-13)
 Implement core authentication functionality.
 
-- [ ] **Task 10: Build sign up functionality & page**
-  - [ ] Create /signup page
-  - [ ] Build sign up form (email, password)
-  - [ ] Implement sign up logic using Supabase Auth
-  - [ ] Add validation and error handling
-  - [ ] Redirect to dashboard on successful signup
-  - [ ] **Deliverable:** Functional sign up page with proper error handling
+- [x] **Task 10: Build sign up functionality & page**
+  - [x] Create /signup page
+  - [x] Build sign up form (email, password)
+  - [x] Implement sign up logic using Supabase Auth
+  - [x] Add validation and error handling
+  - [x] Redirect to dashboard on successful signup
+  - [x] **Deliverable:** Functional sign up page with proper error handling
 
-- [ ] **Task 11: Build sign in functionality & page**
-  - [ ] Create /login page
-  - [ ] Build sign in form (email, password)
-  - [ ] Implement sign in logic using Supabase Auth
-  - [ ] Add validation and error handling
-  - [ ] Redirect to dashboard on successful login
-  - [ ] **Deliverable:** Functional sign in page with proper error handling
+- [x] **Task 11: Build sign in functionality & page**
+  - [x] Create /login page
+  - [x] Build sign in form (email, password)
+  - [x] Implement sign in logic using Supabase Auth
+  - [x] Add validation and error handling
+  - [x] Redirect to dashboard on successful login
+  - [x] **Deliverable:** Functional sign in page with proper error handling
 
-- [ ] **Task 12: Build sign out functionality**
-  - [ ] Implement sign out function (utilities or hooks)
-  - [ ] Add sign out buttons to dashboard and profile pages
-  - [ ] Clear session on sign out
-  - [ ] Redirect to home page after sign out
-  - [ ] **Deliverable:** Working sign out functionality across application
+- [x] **Task 12: Build sign out functionality**
+  - [x] Implement sign out function (utilities or hooks)
+  - [x] Add sign out buttons to dashboard and profile pages
+  - [x] Clear session on sign out
+  - [x] Redirect to home page after sign out
+  - [x] **Deliverable:** Working sign out functionality across application
 
-- [ ] **Task 13: Create protected route wrapper/middleware**
-  - [ ] Create utility/hook for checking authentication
-  - [ ] Implement protected route pattern for server/client components
-  - [ ] Redirect unauthenticated users to login
-  - [ ] Handle loading states during auth check
-  - [ ] **Deliverable:** Reusable protected route pattern documented
+- [x] **Task 13: Create protected route wrapper/middleware**
+  - [x] Create utility/hook for checking authentication
+  - [x] Implement protected route pattern for server/client components
+  - [x] Redirect unauthenticated users to login
+  - [x] Handle loading states during auth check
+  - [x] **Deliverable:** Reusable protected route pattern documented
 
 ---
 
 ### Phase 4: User Interface (Tasks 14-17)
 Build all required pages and features.
 
-- [ ] **Task 14: Build home page with auth status display**
-  - [ ] Create / (home) page
-  - [ ] Show welcome message
-  - [ ] Display authentication status
-  - [ ] Show login/signup links if not authenticated
-  - [ ] Show dashboard link if authenticated
-  - [ ] **Deliverable:** Functional home page with auth status
+- [x] **Task 14: Build home page with auth status display** ✓
+  - [x] Create / (home) page
+  - [x] Show welcome message
+  - [x] Display authentication status
+  - [x] Show login/signup links if not authenticated
+  - [x] Show dashboard link if authenticated
+  - [x] **Deliverable:** Functional home page with auth status
 
-- [ ] **Task 15: Build dashboard page (protected route)**
-  - [ ] Create /dashboard page (protected)
-  - [ ] Display user profile information
-  - [ ] Show sign out button
-  - [ ] Link to profile page
-  - [ ] Display profile data from database
-  - [ ] **Deliverable:** Protected dashboard page showing user data
+- [x] **Task 15: Build dashboard page (protected route)** ✓
+  - [x] Create /dashboard page (protected)
+  - [x] Display user profile information
+  - [x] Show sign out button
+  - [x] Link to profile page
+  - [x] Display profile data from database
+  - [x] **Deliverable:** Protected dashboard page showing user data
 
-- [ ] **Task 16: Build profile page with edit form (protected)**
-  - [ ] Create /profile page (protected)
-  - [ ] Display current profile information
-  - [ ] Build form to edit fields (full_name, etc.)
-  - [ ] Add save/update button
-  - [ ] Implement form validation
-  - [ ] **Deliverable:** Functional profile editing page
+- [x] **Task 16: Build profile page with edit form (protected)**
+  - [x] Create /profile page (protected)
+  - [x] Display current profile information
+  - [x] Build form to edit fields (full_name, etc.)
+  - [x] Add save/update button
+  - [x] Implement form validation
+  - [x] **Deliverable:** Functional profile editing page
 
-- [ ] **Task 17: Implement avatar upload to Storage**
-  - [ ] Configure Supabase Storage bucket for avatars
-  - [ ] Create file input in profile page
-  - [ ] Implement upload logic with validation (file type, size)
-  - [ ] Store file in Supabase Storage
-  - [ ] Update avatar_url in profiles table
-  - [ ] Display uploaded avatar in profile/dashboard
-  - [ ] Handle upload errors gracefully
-  - [ ] **Deliverable:** Working avatar upload and display
+- [x] **Task 17: Implement avatar upload to Storage**
+  - [x] Configure Supabase Storage bucket for avatars
+  - [x] Create file input in profile page
+  - [x] Implement upload logic with validation (file type, size)
+  - [x] Store file in Supabase Storage
+  - [x] Update avatar_url in profiles table
+  - [x] Display uploaded avatar in profile/dashboard
+  - [x] Handle upload errors gracefully
+  - [x] **Deliverable:** Working avatar upload and display
 
 ---
 

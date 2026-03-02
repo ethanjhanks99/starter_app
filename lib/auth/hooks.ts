@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { createSupabaseClient } from '@/lib/supabase/client';
-import { createClient } from '../supabase/server';
 
 interface User {
   id: string;

@@ -173,41 +173,41 @@ Build all required pages and features.
 ### Phase 5: Testing & Tooling (Tasks 18-21)
 Set up testing infrastructure and automation scripts.
 
-- [ ] **Task 18: Set up unit testing framework (Jest/Vitest)**
-  - [ ] Install Jest or Vitest
-  - [ ] Configure test setup
-  - [ ] Set up testing utilities and helpers
-  - [ ] Create test configuration files
-  - [ ] **Deliverable:** Testing framework ready to use
+- [x] **Task 18: Set up unit testing framework (Jest/Vitest)**
+  - [x] Install Jest or Vitest
+  - [x] Configure test setup
+  - [x] Set up testing utilities and helpers
+  - [x] Create test configuration files
+  - [x] **Deliverable:** Testing framework ready to use
 
-- [ ] **Task 19: Write example component/utility/auth tests**
-  - [ ] Write tests for utility functions (authentication helpers, etc.)
-  - [ ] Write tests for React components (sign in form, profile form, etc.)
-  - [ ] Write tests for authentication-related code
-  - [ ] Include at least 3-4 example tests
-  - [ ] Document how to add new tests
-  - [ ] **Deliverable:** Example tests demonstrating common patterns
+- [x] **Task 19: Write example component/utility/auth tests**
+  - [x] Write tests for utility functions (authentication helpers, etc.)
+  - [x] Write tests for React components (sign in form, profile form, etc.)
+  - [x] Write tests for authentication-related code
+  - [x] Include at least 3-4 example tests
+  - [x] Document how to add new tests
+  - [x] **Deliverable:** Example tests demonstrating common patterns
 
-- [ ] **Task 20: Create setup.sh script for automation**
-  - [ ] Script installs npm dependencies
-  - [ ] Script starts local Supabase
-  - [ ] Script extracts Supabase credentials from output
-  - [ ] Script creates/updates .env.local with credentials
-  - [ ] Script runs database migrations
-  - [ ] Script shows completion message and next steps
-  - [ ] Make script idempotent (safe to run multiple times)
-  - [ ] Handle errors with helpful messages
-  - [ ] **Deliverable:** Working setup.sh script
+- [x] **Task 20: Create setup.sh script for automation**
+  - [x] Script installs npm dependencies
+  - [x] Script starts local Supabase
+  - [x] Script extracts Supabase credentials from output
+  - [x] Script creates/updates .env.local with credentials
+  - [x] Script runs database migrations
+  - [x] Script shows completion message and next steps
+  - [x] Make script idempotent (safe to run multiple times)
+  - [x] Handle errors with helpful messages
+  - [x] **Deliverable:** Working setup.sh script
 
-- [ ] **Task 21: Create GitHub Actions migration workflow**
-  - [ ] Create .github/workflows/database-migrations.yml
-  - [ ] Workflow triggers on push to main/production branch
-  - [ ] Workflow connects to production Supabase
-  - [ ] Workflow runs pending migrations
-  - [ ] Workflow handles errors and provides feedback
-  - [ ] Workflow uses GitHub Secrets for credentials
-  - [ ] Document how to configure workflow
-  - [ ] **Deliverable:** GitHub Actions workflow ready to deploy
+- [x] **Task 21: Create GitHub Actions migration workflow**
+  - [x] Create .github/workflows/database-migrations.yml
+  - [x] Workflow triggers on push to main/production branch
+  - [x] Workflow connects to production Supabase
+  - [x] Workflow runs pending migrations
+  - [x] Workflow handles errors and provides feedback
+  - [x] Workflow uses GitHub Secrets for credentials
+  - [x] Document how to configure workflow
+  - [x] **Deliverable:** GitHub Actions workflow ready to deploy
 
 ---
 

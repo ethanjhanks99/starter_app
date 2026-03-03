@@ -1089,5 +1089,340 @@ This ensures `next/image` in `Avatar` can render both local and hosted Supabase 
 - Run `supabase db reset` (or equivalent migration apply command) to apply the new storage migration in local DB before testing uploads.
 - Dashboard already reads `avatar_url` through existing `useProfile()` flow, so uploaded avatars appear there after data refresh/navigation.
 
+---
+
+# Implementation Notes - Task 18: Unit Testing Framework Setup (Vitest)
+
+## Date Completed
+March 2, 2026
+
+## Overview
+Implemented the project testing foundation using Vitest with a jsdom environment, Testing Library integration, shared test utilities, and runnable npm scripts for standard, watch, and coverage test execution.
+
+## Files Created/Modified
+- `package.json` (MODIFIED)
+- `vitest.config.ts` (NEW)
+- `vitest.setup.ts` (NEW)
+- `__tests__/utils/test-utils.tsx` (NEW)
+
+## What Was Implemented
+
+### 1. Testing Dependencies Installed
+Added the required dev dependencies for Task 18:
+- `vitest`
+- `jsdom`
+- `@testing-library/react`
+- `@testing-library/jest-dom`
+- `@testing-library/user-event`
+- `@vitest/coverage-v8`
+
+### 2. npm Test Scripts Added
+Updated `package.json` scripts:
+- `test` → `vitest run`
+- `test:watch` → `vitest`
+- `test:coverage` → `vitest run --coverage`
+
+This provides the standard command surface needed for Task 19 test authoring.
+
+### 3. Vitest Core Configuration
+Created `vitest.config.ts` with:
+- `jsdom` test environment
+- setup file registration via `setupFiles: ['./vitest.setup.ts']`
+- include globs for both `__tests__` and colocated `*.test`/`*.spec` files
+- `passWithNoTests: true` to allow framework validation before Task 19 tests exist
+- V8 coverage provider with text + HTML reporters
+- alias resolution for `@` to match the project TypeScript import style
+
+### 4. Test Setup Utilities
+Created `vitest.setup.ts` to establish baseline test runtime behavior:
+- Testing Library cleanup after each test
+- Jest DOM matchers via `@testing-library/jest-dom/vitest`
+- browser API shims for `window.matchMedia` and `ResizeObserver`
+
+These avoid common runtime failures for component tests in jsdom.
+
+### 5. Shared Render Helper for Future Tests
+Created `__tests__/utils/test-utils.tsx`:
+- exports `renderWithProviders()` wrapper
+- re-exports Testing Library utilities
+
+This provides a single import point and a foundation for adding providers later (router/context/etc.) without rewriting tests.
+
+## Verification Performed
+
+### Diagnostics
+- No TypeScript/diagnostic errors in:
+  - `vitest.config.ts`
+  - `vitest.setup.ts`
+  - `__tests__/utils/test-utils.tsx`
+
+### Command Validation
+Executed all Task 18 framework commands successfully:
+- `npm run test` → passes with zero tests (expected before Task 19)
+- `npm run test:watch` → starts watch mode successfully
+- `npm run test:coverage` → runs with V8 coverage and completes
+
+## Deliverable Status
+- ✅ Testing framework installed and configured
+- ✅ Test setup utilities and helper file created
+- ✅ npm scripts ready for development and CI usage
+- ✅ Project ready for Task 19 (writing example tests)
+
+---
+
+# Implementation Notes - Task 19: Example Component/Utility/Auth Tests
+
+## Date Completed
+March 2, 2026
+
+## Overview
+Implemented a representative Task 19 test suite using the Vitest infrastructure from Task 18, covering utility functions, auth form components, and auth hook behavior with mocked Supabase/router dependencies.
+
+## Files Created/Modified
+- `__tests__/utils/lib-utils.test.ts` (NEW)
+- `__tests__/components/auth-login-form.test.tsx` (NEW)
+- `__tests__/components/auth-signup-form.test.tsx` (NEW)
+- `__tests__/auth/use-auth.test.tsx` (NEW)
+- `README.md` (MODIFIED)
+
+## What Was Implemented
+
+### 1. Utility Tests (`lib/utils.ts`)
+Created `__tests__/utils/lib-utils.test.ts` with coverage for:
+- `isValidEmail()` valid and invalid cases
+- `isValidPassword()` minimum length behavior
+- `cn()` class merging with falsy filtering
+
+### 2. Component Tests (`LoginForm`, `SignupForm`)
+
+#### `__tests__/components/auth-login-form.test.tsx`
+Implemented tests for:
+- Supabase login error rendering in UI (`Invalid login credentials`)
+- Successful login path:
+  - calls `supabase.auth.signInWithPassword()` with expected payload
+  - redirects with `router.push('/dashboard')`
+  - triggers `router.refresh()`
+
+#### `__tests__/components/auth-signup-form.test.tsx`
+Implemented tests for:
+- Password length validation (`Password must be at least 8 characters`)
+- Password mismatch validation (`Passwords do not match`)
+- Successful signup path:
+  - calls `supabase.auth.signUp()` with expected payload
+  - redirects with `router.push('/dashboard')`
+  - triggers `router.refresh()`
+
+### 3. Auth Hook Tests (`useAuth`)
+Created `__tests__/auth/use-auth.test.tsx` to validate `useAuth()` behavior:
+- Loading → success state with mocked user response
+- Loading → error state with mocked rejected auth request
+
+### 4. Mocking Strategy
+Used Vitest module mocks for:
+- `next/navigation` (`useRouter`) in component tests
+- `@/lib/supabase/client` (`createSupabaseClient`) in component and hook tests
+
+This isolates UI/hook logic from network behavior and enables deterministic test execution.
+
+### 5. README Test Authoring Documentation
+Updated `README.md` with a new **Testing** section including:
+- `npm run test`
+- `npm run test:watch`
+- `npm run test:coverage`
+
+Also documented where to place new tests (`__tests__/utils`, `__tests__/components`, `__tests__/auth`), naming conventions (`.test.ts/.test.tsx`), and use of shared helper utilities.
+
+## Verification Performed
+
+### Test Commands
+- `npm run test` → **PASS**
+  - 4 test files passed
+  - 12 tests passed
+
+- `npm run test:coverage` → **PASS**
+  - 4 test files passed
+  - 12 tests passed
+  - Coverage report generated successfully
+
+### Diagnostics
+- No diagnostics errors in all Task 19 test files and README updates.
+
+## Deliverable Status
+- ✅ Utility tests added
+- ✅ Component tests added
+- ✅ Auth-related hook tests added
+- ✅ 3–4+ example tests requirement exceeded (12 total assertions/tests)
+- ✅ Documentation for adding tests included
+
+---
+
+# Implementation Notes - Task 20: setup.sh Automation Script
+
+## Date Completed
+March 2, 2026
+
+## Overview
+Implemented an idempotent `setup.sh` script that automates local development setup: dependency installation, Supabase startup, credential extraction, `.env.local` updates, and migration application.
+
+## Files Created/Modified
+- `setup.sh` (NEW)
+- `PLAN.md` (MODIFIED; Task 20 marked complete)
+
+## What Was Implemented
+
+### 1. Prerequisite and Environment Checks
+The script verifies required tools before doing any setup work:
+- `node`
+- `npm`
+- `npx`
+- `docker`
+- Supabase CLI availability via `npx supabase --version`
+
+It also checks Docker daemon availability (`docker info`) and exits with a clear error if Docker is not running.
+
+### 2. Dependency Installation
+Runs:
+
+```bash
+npm install
+```
+
+This makes setup repeatable and ensures local dependencies (including `supabase` dev dependency) are installed.
+
+### 3. Start Local Supabase and Capture Output
+Runs:
+
+```bash
+npx supabase start
+```
+
+The script captures and prints command output, then uses `npx supabase status -o env` output to extract credentials.
+
+### 4. Extract and Apply Credentials to `.env.local`
+Reads values from `supabase status -o env`:
+- `API_URL`
+- `ANON_KEY`
+
+Maps them to:
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+Uses an idempotent upsert function that replaces existing key lines and preserves unrelated environment variables in `.env.local`.
+
+### 5. Run Migrations Automatically
+Runs local migration application through:
+
+```bash
+npx supabase db reset --yes
+```
+
+If `supabase/seed.sql` is missing, script falls back to:
+
+```bash
+npx supabase db reset --no-seed --yes
+```
+
+This keeps setup robust for repositories without seed files.
+
+### 6. User-Friendly Completion Output
+Prints a final summary with:
+- success confirmation
+- next steps (`npm run dev`)
+- app URL and Supabase Studio URL
+- redacted anon key display for safer terminal output
+
+## Validation Performed
+
+### Script Syntax
+- `bash -n setup.sh` → valid syntax
+
+### Execution Validation
+- First run: `./setup.sh` → **PASS**
+  - installs dependencies
+  - starts Supabase
+  - updates `.env.local`
+  - applies migrations
+
+- Second run: `./setup.sh` → **PASS**
+  - repeated execution successful
+  - `.env.local` remained clean (no duplicate `NEXT_PUBLIC_SUPABASE_*` keys)
+
+### Idempotency Result
+Confirmed script is safe to re-run multiple times in the same workspace and converges to consistent local setup state.
+
+## Deliverable Status
+- ✅ `setup.sh` installs dependencies
+- ✅ `setup.sh` starts Supabase
+- ✅ Credentials extracted from Supabase output
+- ✅ `.env.local` created/updated automatically
+- ✅ Migrations run automatically
+- ✅ Completion message with next steps provided
+- ✅ Idempotent behavior verified via repeated execution
+- ✅ Error handling included for missing tools and Docker daemon status
+
+---
+
+# Implementation Notes - Task 21: GitHub Actions Migration Workflow
+
+## Date Completed
+March 3, 2026
+
+## Overview
+Implemented a production migration deployment workflow using GitHub Actions. The workflow applies pending Supabase migrations on pushes to deployment branches and supports manual execution.
+
+## Files Created/Modified
+- `.github/workflows/database-migrations.yml` (NEW)
+- `README.md` (MODIFIED; workflow configuration documentation)
+- `PLAN.md` (MODIFIED; Task 21 marked complete)
+
+## What Was Implemented
+
+### 1. Workflow File Creation
+Created `.github/workflows/database-migrations.yml` with:
+- workflow name: `Database Migrations`
+- `push` trigger on `main` and `production`
+- path filter for `supabase/migrations/**`
+- `workflow_dispatch` support for manual runs
+
+### 2. Security and Credential Handling
+Configured secure credential usage via GitHub Secrets:
+- `SUPABASE_ACCESS_TOKEN`
+- `SUPABASE_PROJECT_REF`
+- `SUPABASE_DB_PASSWORD`
+
+Added an explicit validation step that fails early if any required secret is missing.
+
+### 3. Migration Deployment Steps
+Workflow deploy job includes:
+1. `actions/checkout@v4`
+2. `supabase/setup-cli@v1`
+3. `supabase link --project-ref ...`
+4. `supabase db push --password ...`
+
+### 4. Safety and Reliability
+Added:
+- minimal permissions (`contents: read`)
+- concurrency guard (`db-migrations-${{ github.ref }}`) to prevent overlapping runs per branch
+- job timeout (`15` minutes)
+
+### 5. Configuration Documentation
+Updated `README.md` with a **Database Migration Workflow** section covering:
+- workflow triggers
+- required repository secrets
+- execution behavior and deployment steps
+
+## Validation Performed
+- Verified workflow YAML structure and required keys by static review.
+- Verified task tracking updates in `PLAN.md`.
+- Verified README includes setup instructions for GitHub Secrets and workflow usage.
+
+## Deliverable Status
+- ✅ `.github/workflows/database-migrations.yml` created
+- ✅ Workflow triggers configured for deployment branches
+- ✅ Supabase migration push flow implemented
+- ✅ Secrets-based credential handling implemented
+- ✅ Error handling and run-safety controls added
+- ✅ Workflow configuration documented
+
 
 

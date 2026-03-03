@@ -1503,5 +1503,148 @@ Rewrote `README.md` into a complete, project-specific guide covering setup, arch
 - ✅ All Task 22 checklist items covered
 - ✅ Task tracking updated in `PLAN.md`
 
+---
+
+# Implementation Notes - Task 23: Clean-State Setup Validation
+
+## Date Completed
+March 3, 2026
+
+## Overview
+Executed a full clean-state validation pass to confirm the project can be bootstrapped from scratch using `setup.sh`, then verified application routes and authentication/profile behavior end-to-end.
+
+## Files Modified
+- `PLAN.md` (Task 23 checklist marked complete)
+- `IMPL_NOTES.md` (this section)
+
+## What Was Executed
+
+### 1. Clean-State Reset
+- Removed `node_modules`
+- Removed `.env.local`
+- Kept `supabase/` directory and migration/schema files intact
+
+### 2. Setup Script Validation (`./setup.sh`)
+Ran setup from a clean state and confirmed all expected phases completed:
+- Prerequisite checks passed (`node`, `npm`, `npx`, `docker`)
+- Dependencies installed successfully via `npm install`
+- Local Supabase services started successfully
+- `.env.local` generated with:
+  - `NEXT_PUBLIC_SUPABASE_URL`
+  - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- Migration reset/apply completed successfully:
+  - `20260223185454_profiles_schema.sql`
+  - `20260225000100_profiles_auto_create.sql`
+  - `20260225000200_profiles_rls_policies.sql`
+  - `20260302120000_avatars_storage.sql`
+
+### 3. Runtime + Route Validation
+- Started app with `npm run dev`
+- Confirmed server handled requests without runtime errors
+- Verified key route responses returned HTTP `200`:
+  - `/`
+  - `/login`
+  - `/signup`
+  - `/dashboard`
+  - `/profile`
+
+### 4. Authentication Flow Validation (Programmatic E2E)
+Executed a scripted flow against local Supabase using project anon credentials:
+1. Sign up a new test user
+2. Sign in with created credentials
+3. Verify auto-created `profiles` row exists for that user
+4. Update `profiles.full_name`
+5. Sign out
+
+Observed successful outputs for all phases:
+- `signup_ok`
+- `signin_ok`
+- `profile_autocreate_ok`
+- `profile_update_ok`
+- `signout_ok`
+
+## Notes
+- During validation, shell state was briefly affected by zsh special variable behavior and history expansion while running ad-hoc checks. Validation continued using clean command forms and fresh terminal sessions where needed.
+- No code changes to app logic were required to pass Task 23.
+
+## Deliverable Status
+- ✅ `setup.sh` works from clean state
+- ✅ Dependencies install successfully from scratch
+- ✅ Supabase stack and migrations apply successfully
+- ✅ `.env.local` is created correctly
+- ✅ App starts and required pages load
+- ✅ Auth + profile creation/update flow verified end-to-end
+- ✅ Task 23 checklist completed in `PLAN.md`
+
+---
+
+# Implementation Notes - Task 24: Application Visual Design Renovation
+
+## Date Completed
+March 3, 2026
+
+## Overview
+Renovated the application UI into a cohesive MVP visual system while preserving all existing authentication, profile editing, and avatar upload behavior.
+
+## Files Modified
+- `app/globals.css`
+- `components/ui/Button.tsx`
+- `components/ui/Input.tsx`
+- `components/ui/Card.tsx`
+- `components/ui/Avatar.tsx`
+- `components/layout/Header.tsx`
+- `components/layout/Navigation.tsx`
+- `components/auth/LoginForm.tsx`
+- `components/auth/SignupForm.tsx`
+- `app/page.tsx`
+- `app/(auth)/login/page.tsx`
+- `app/(auth)/signup/page.tsx`
+- `app/(protected)/dashboard/page.tsx`
+- `app/(protected)/profile/page.tsx`
+- `lib/auth/protected.tsx`
+- `PLAN.md`
+
+## Before → After (Design Audit Summary)
+
+### Before
+- Mixed visual language across pages (different spacing scales, heading sizes, and card rhythms).
+- UI primitives (`Button`, `Input`, `Card`) used hard-coded Tailwind color classes instead of shared theme primitives.
+- Header/navigation styling was separate from page-level styling.
+- Auth/protected pages had inconsistent status/error styling and inconsistent link/button focus treatment.
+
+### After
+- Introduced a unified MVP ruleset based on:
+  - consistent vertical rhythm (`page-container`, `auth-container`, `card`, `card-tight`)
+  - shared typography hierarchy (`page-title`, `section-title`, `muted-text`)
+  - shared feedback styles (`status`, `status-error`, `status-success`)
+- Updated UI primitives to consume global classes and tokens:
+  - `Button` now maps variants/sizes to `.btn*` classes
+  - `Input` now uses `.form-*` classes for label/input/error state
+  - `Card` now uses shared `.card` class
+  - `Avatar` now uses token-based border/surface styling
+- Added cohesive header/nav primitives (`site-header`, `site-header-inner`, `nav-link`, `nav-row`) and applied them across protected/auth routes.
+- Re-composed login/signup/home/dashboard/profile layout and sections to follow one consistent card/form hierarchy.
+
+## Accessibility + Responsiveness
+- Preserved and standardized keyboard-visible focus styles through shared button/link/input classes.
+- Standardized text contrast by switching to token-based foreground/muted/danger/success usage.
+- Maintained responsive layout patterns (`flex-col sm:flex-row`, max-width containers, adaptive spacing).
+
+## Functional Safety
+- No auth/profile business logic changed (sign up, sign in, sign out, protected checks, profile update, avatar upload flow unchanged).
+- Validation outcomes and API interactions remain identical; only visual structure/classes were renovated.
+
+## Verification Performed
+- Diagnostics: no errors across all modified design/component/page files.
+- Tests: `npm run test` passed.
+  - 4 test files passed
+  - 12 tests passed
+
+## Deliverable Status
+- ✅ Cohesive, modernized UI across all primary routes
+- ✅ Dark mode and responsive parity maintained
+- ✅ Accessibility basics (focus visibility, readable states, contrast) improved
+- ✅ Existing auth/profile functionality unchanged
+
 
 

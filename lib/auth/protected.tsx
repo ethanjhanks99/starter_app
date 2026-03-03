@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useAuth } from './hooks';
 
 interface ProtectedRouteProps {
@@ -23,7 +24,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   }, [user, loading, router]);
 
   if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+    return <div className="min-h-screen flex items-center justify-center muted-text">Loading...</div>;
   }
 
   if (!user) {
@@ -39,17 +40,19 @@ export function ProtectedRouteWithFallback({
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+    return <div className="min-h-screen flex items-center justify-center muted-text">Loading...</div>;
   }
 
   if (!user) {
     return (
-      <div className="flex items-center justify-center min-h-screen flex-col">
-        <h1 className="text-2xl font-bold mb-4">Access Denied</h1>
-        <p className="text-gray-600 mb-4">Please sign in to access this page.</p>
-        <a href="/login" className="text-blue-600 hover:text-blue-800">
+      <div className="auth-container flex-col">
+        <div className="card w-full max-w-md text-center">
+          <h1 className="section-title mb-3">Access Denied</h1>
+          <p className="muted-text mb-4">Please sign in to access this page.</p>
+          <Link href="/login" className="link font-medium">
           Go to Login
-        </a>
+          </Link>
+        </div>
       </div>
     );
   }

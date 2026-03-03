@@ -1,18 +1,19 @@
 import { LoginForm } from '@/components/auth/LoginForm';
 import { Header } from '@/components/layout/Header';
+import Link from 'next/link';
 
 export default function LoginPage() {
   return (
     <>
       <Header />
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="auth-container">
         <div className="w-full max-w-md">
           <LoginForm />
-          <p className="text-center mt-4 text-gray-600">
+          <p className="muted-text text-center mt-4">
             Don&apos;t have an account?{' '}
-            <a href="/signup" className="text-blue-600 hover:text-blue-800 font-medium">
+            <Link href="/signup" className="link font-medium">
               Sign up
-            </a>
+            </Link>
           </p>
         </div>
       </div>

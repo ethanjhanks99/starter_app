@@ -211,7 +211,7 @@ Set up testing infrastructure and automation scripts.
 
 ---
 
-### Phase 6: Documentation & Quality (Tasks 22-24)
+### Phase 6: Documentation & Quality (Tasks 22-25)
 Finalize documentation and validate the complete system.
 
 - [x] **Task 22: Write comprehensive README documentation**
@@ -231,21 +231,32 @@ Finalize documentation and validate the complete system.
   - [x] Add troubleshooting section
   - [x] **Deliverable:** Complete README.md with all sections
 
-- [ ] **Task 23: Test setup script from clean state**
-  - [ ] Delete node_modules folder
-  - [ ] Delete .env.local file
-  - [ ] **Keep** supabase directory (migrations/schemas)
-  - [ ] Run ./setup.sh from scratch
-  - [ ] Verify dependencies installed
-  - [ ] Verify Supabase starts
-  - [ ] Verify .env.local created
-  - [ ] Verify migrations applied
-  - [ ] Verify application runs without errors
-  - [ ] Verify all pages load correctly
-  - [ ] Verify authentication flow works end-to-end
-  - [ ] **Deliverable:** Confirmed full system works from clean state
+- [x] **Task 23: Test setup script from clean state**
+  - [x] Delete node_modules folder
+  - [x] Delete .env.local file
+  - [x] **Keep** supabase directory (migrations/schemas)
+  - [x] Run ./setup.sh from scratch
+  - [x] Verify dependencies installed
+  - [x] Verify Supabase starts
+  - [x] Verify .env.local created
+  - [x] Verify migrations applied
+  - [x] Verify application runs without errors
+  - [x] Verify all pages load correctly
+  - [x] Verify authentication flow works end-to-end
+  - [x] **Deliverable:** Confirmed full system works from clean state
 
-- [ ] **Task 24: Remove node_modules for submission**
+- [x] **Task 24: Renovate application visual design**
+  - [x] Audit visual inconsistencies across `app/page.tsx`, auth pages, dashboard, and profile
+  - [x] Define an MVP design direction and ruleset (spacing scale, heading/body hierarchy, card/form rhythm)
+  - [x] Refine shared primitives in `app/globals.css` and `components/ui/` (Button, Input, Card, Avatar) without changing functional behavior
+  - [x] Update page-level composition in `app/(auth)/login/page.tsx`, `app/(auth)/signup/page.tsx`, `app/(protected)/dashboard/page.tsx`, and `app/(protected)/profile/page.tsx` to follow the new visual rules
+  - [x] Ensure navigation/header styling in `components/layout/Header.tsx` and `components/layout/Navigation.tsx` matches updated page aesthetics
+  - [x] Validate dark mode parity and responsive behavior at mobile/tablet/desktop breakpoints
+  - [x] Validate accessibility basics: keyboard-visible focus styles, text contrast, and readable form/error states
+  - [x] Capture before/after notes in `IMPL_NOTES.md` (what changed and why)
+  - [x] **Deliverable:** Cohesive, modernized UI across all primary routes with unchanged auth/profile functionality
+
+- [ ] **Task 25: Remove node_modules for submission**
   - [ ] Delete node_modules folder
   - [ ] Keep all other files intact
   - [ ] Verify package.json and package-lock.json present
@@ -280,7 +291,7 @@ Finalize documentation and validate the complete system.
    - Setup script working
    - GitHub Actions configured
 
-6. **Ready for Submission** - After Task 24
+6. **Ready for Submission** - After Task 25
    - All documentation complete
    - Full end-to-end test passed
    - Project cleaned up
@@ -296,6 +307,7 @@ Finalize documentation and validate the complete system.
 - Tasks 20-21 can start anytime after Task 7
 - Task 22 should be written as you complete features
 - Task 23 should be completed close to submission
+- Task 24 should be completed after Task 23 and before Task 25
 
 ---
 

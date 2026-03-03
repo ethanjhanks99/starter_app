@@ -254,20 +254,20 @@ export default function ProfilePage() {
     return (
       <ProtectedRouteWithFallback>
         <Header>
-          <div className="flex items-center gap-4">
-            <Link href="/dashboard" className="text-gray-600 hover:text-gray-900">
+          <div className="nav-row">
+            <Link href="/dashboard" className="nav-link">
               Dashboard
             </Link>
             <LogoutButton />
           </div>
         </Header>
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="page-container max-w-2xl py-10">
           <Card>
             <div className="animate-pulse space-y-4">
-              <div className="h-8 bg-gray-200 rounded w-1/3"></div>
-              <div className="h-4 bg-gray-200 rounded"></div>
-              <div className="h-10 bg-gray-200 rounded"></div>
-              <div className="h-10 bg-gray-200 rounded"></div>
+              <div className="h-8 bg-[var(--border)] rounded w-1/3"></div>
+              <div className="h-4 bg-[var(--border)] rounded"></div>
+              <div className="h-10 bg-[var(--border)] rounded"></div>
+              <div className="h-10 bg-[var(--border)] rounded"></div>
             </div>
           </Card>
         </div>
@@ -278,25 +278,25 @@ export default function ProfilePage() {
   return (
     <ProtectedRouteWithFallback>
       <Header>
-        <div className="flex items-center gap-4">
-          <Link href="/dashboard" className="text-gray-600 hover:text-gray-900">
+        <div className="nav-row">
+          <Link href="/dashboard" className="nav-link">
             Dashboard
           </Link>
           <LogoutButton />
         </div>
       </Header>
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="page-container max-w-2xl py-10">
         <Card>
-          <h1 className="text-3xl font-bold mb-6">Edit Profile</h1>
+          <h1 className="page-title mb-6">Edit Profile</h1>
 
           {profileError && (
-            <div className="mb-6 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            <div className="status status-error mb-6">
               Failed to load profile: {profileError.message}
             </div>
           )}
 
           {profile && (
-            <div className="mb-6 rounded-md border border-gray-200 p-4">
+            <div className="card-tight mb-6">
               <div className="flex items-center gap-4">
                 <Avatar
                   src={profile.avatar_url}
@@ -305,9 +305,9 @@ export default function ProfilePage() {
                   size="md"
                 />
                 <div>
-                  <p className="text-sm text-gray-500">Email</p>
+                  <p className="muted-text">Email</p>
                   <p className="font-medium break-all">{profile.email}</p>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="muted-text mt-1">
                     Last updated: {formatDate(profile.updated_at)}
                   </p>
                 </div>
@@ -315,28 +315,28 @@ export default function ProfilePage() {
             </div>
           )}
 
-          <div className="mb-6 rounded-md border border-gray-200 p-4 space-y-3">
-            <h2 className="text-lg font-semibold">Avatar</h2>
-            <p className="text-sm text-gray-500">Upload a PNG, JPEG, or WebP image up to 5MB.</p>
+          <div className="card-tight mb-6 space-y-3">
+            <h2 className="section-title text-lg">Avatar</h2>
+            <p className="muted-text">Upload a PNG, JPEG, or WebP image up to 5MB.</p>
             <input
               ref={fileInputRef}
               type="file"
               accept="image/png,image/jpeg,image/webp"
               onChange={handleAvatarChange}
-              className="block w-full text-sm text-gray-700 file:mr-4 file:rounded file:border-0 file:bg-blue-600 file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-blue-700"
+              className="file-input"
             />
             {selectedAvatarFile && (
-              <p className="text-sm text-gray-600">
+              <p className="muted-text">
                 Selected file: {selectedAvatarFile.name}
               </p>
             )}
             {avatarError && (
-              <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              <div className="status status-error">
                 {avatarError}
               </div>
             )}
             {avatarSuccess && (
-              <div className="rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+              <div className="status status-success">
                 {avatarSuccess}
               </div>
             )}
@@ -366,13 +366,13 @@ export default function ProfilePage() {
             />
 
             {submitError && (
-              <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              <div className="status status-error">
                 {submitError}
               </div>
             )}
 
             {successMessage && (
-              <div className="rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+              <div className="status status-success">
                 {successMessage}
               </div>
             )}

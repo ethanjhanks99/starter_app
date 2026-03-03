@@ -9,30 +9,30 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="page-container flex items-center justify-center">
+      <div className="page-container min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-primary"></div>
-          <p className="mt-4 text-muted">Loading...</p>
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-[var(--border)] border-t-primary"></div>
+          <p className="mt-4 muted-text">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="page-container flex flex-col items-center justify-center min-h-screen gap-12">
-      <div className="text-center max-w-2xl">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+    <div className="page-container min-h-screen flex flex-col justify-center gap-10">
+      <div className="text-center max-w-2xl mx-auto">
+        <h1 className="page-title text-4xl mb-4">
           Welcome to Starter App
         </h1>
-        <p className="text-lg text-muted mb-8">
+        <p className="text-lg text-[var(--muted)] mb-8">
           A modern Next.js application with Supabase authentication and secure database integration.
         </p>
 
         {user ? (
           <div className="space-y-6">
-            <div className="card bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800">
-              <p className="text-sm text-muted mb-2">You are logged in as:</p>
-              <p className="font-semibold text-gray-900 dark:text-white break-all">
+            <div className="card-tight text-left max-w-xl mx-auto">
+              <p className="muted-text mb-2">You are logged in as:</p>
+              <p className="font-semibold break-all">
                 {user.email}
               </p>
             </div>
@@ -48,7 +48,7 @@ export default function Home() {
           </div>
         ) : (
           <div className="space-y-6">
-            <p className="text-muted">
+            <p className="muted-text">
               Get started by signing up or logging in to your account.
             </p>
 
@@ -64,7 +64,7 @@ export default function Home() {
         )}
       </div>
 
-      <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted max-w-2xl">
+      <div className="border-t border-border pt-8 text-center muted-text max-w-2xl mx-auto">
         <p>
           This starter app includes authentication, protected routes, and a secure database setup with Supabase.
         </p>

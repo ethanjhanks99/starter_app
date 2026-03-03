@@ -62,10 +62,10 @@ export const LoginForm = () => {
 
   return (
     <Card>
-      <h1 className="text-2xl font-bold mb-6">Sign In</h1>
+      <h1 className="section-title mb-6">Sign In</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
-          <div className="p-3 bg-red-100 text-red-700 rounded text-sm">
+          <div className="status status-error">
             {error}
           </div>
         )}

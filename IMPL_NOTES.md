@@ -1424,5 +1424,84 @@ Updated `README.md` with a **Database Migration Workflow** section covering:
 - ✅ Error handling and run-safety controls added
 - ✅ Workflow configuration documented
 
+---
+
+# Implementation Notes - Task 22: Comprehensive README Documentation
+
+## Date Completed
+March 3, 2026
+
+## Overview
+Rewrote `README.md` into a complete, project-specific guide covering setup, architecture, database/auth behavior, deployment, CI migration workflow, testing, and troubleshooting. This documentation now matches the current implementation from Tasks 1-21 and satisfies all Task 22 checklist requirements.
+
+## Files Modified
+- `README.md` (rewritten)
+- `PLAN.md` (Task 22 checklist marked complete)
+
+## What Was Implemented
+
+### 1. Project Description and Purpose
+- Added a clear starter-app overview with supported capabilities:
+  - Supabase auth (signup/login/logout)
+  - protected routes
+  - profile management
+  - avatar upload
+  - testing/tooling/automation baseline
+
+### 2. Prerequisites + Setup Paths
+- Added explicit prerequisite section for Node.js, npm, Docker.
+- Added **Quick Start** section using `./setup.sh` as the default path.
+- Added **Manual Setup** section with exact commands for install, Supabase startup/status, env setup, migration reset, and app startup.
+
+### 3. Environment Variables Documentation
+- Documented required runtime variables in `.env.local`:
+  - `NEXT_PUBLIC_SUPABASE_URL`
+  - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- Documented required CI/CD GitHub secrets:
+  - `SUPABASE_ACCESS_TOKEN`
+  - `SUPABASE_PROJECT_REF`
+  - `SUPABASE_DB_PASSWORD`
+
+### 4. Structure, Conventions, and Reuse Guidance
+- Added an updated project structure map aligned with current route groups and folder layout.
+- Added guidance for reusing this repository as a base for new projects.
+- Added code-organization/conventions section for `components`, `lib/auth`, `lib/supabase`, migrations, and tests.
+
+### 5. Database + Authentication Documentation
+- Added profiles schema overview (`id`, `email`, `full_name`, `avatar_url`, `updated_at`).
+- Documented DB automation/security behavior:
+  - auto-create profile trigger on signup
+  - `updated_at` trigger
+  - RLS policies (`auth.uid() = id`)
+- Added auth flow walkthrough from signup to protected routes and logout.
+- Added avatar storage/policy summary for the `avatars` bucket.
+
+### 6. Testing, Deployment, and Workflow Documentation
+- Added complete test command section:
+  - `npm run test`
+  - `npm run test:watch`
+  - `npm run test:coverage`
+- Added deployment instructions for Vercel/Netlify with required env vars.
+- Added GitHub Actions migration setup guide for `.github/workflows/database-migrations.yml`.
+
+### 7. Troubleshooting Section
+- Added practical troubleshooting entries for:
+  - Docker not running
+  - Supabase startup issues
+  - stale/missing `.env.local`
+  - migration reset issues
+  - auth failures
+  - avatar rendering issues
+  - test environment issues
+
+## Verification Performed
+- Manual review confirmed every Task 22 checklist item from `PLAN.md` is now explicitly represented in `README.md`.
+- Updated `PLAN.md` to mark Task 22 and all Task 22 sub-checklist items as complete.
+
+## Deliverable Status
+- ✅ `README.md` rewritten as comprehensive documentation
+- ✅ All Task 22 checklist items covered
+- ✅ Task tracking updated in `PLAN.md`
+
 
 

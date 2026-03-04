@@ -256,12 +256,12 @@ Finalize documentation and validate the complete system.
   - [x] Capture before/after notes in `IMPL_NOTES.md` (what changed and why)
   - [x] **Deliverable:** Cohesive, modernized UI across all primary routes with unchanged auth/profile functionality
 
-- [ ] **Task 25: Remove node_modules for submission**
-  - [ ] Delete node_modules folder
-  - [ ] Keep all other files intact
-  - [ ] Verify package.json and package-lock.json present
-  - [ ] Final review of project structure
-  - [ ] **Deliverable:** Project ready for submission
+- [x] **Task 25: Remove node_modules for submission**
+  - [x] Delete node_modules folder
+  - [x] Keep all other files intact
+  - [x] Verify package.json and package-lock.json present
+  - [x] Final review of project structure
+  - [x] **Deliverable:** Project ready for submission
 
 ---
 
